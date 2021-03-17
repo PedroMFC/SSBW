@@ -1,9 +1,0 @@
-Tarea 2
-
- - Backup restore ---> mongodump y mongorestore.
-  https://docs.mongodb.com/manual/tutorial/backup-and-restore-tools/
-
-  docker-compose exec mongo /bin/bash
-  mongodump -out=/backup
- 
- - FileField

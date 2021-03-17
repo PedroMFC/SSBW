@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<head >
+    <meta charset="UTF-8">
+</head>
+
+<html lan="eng">
+<body>
+    hola {{saludo}}
+    <br><br>
+    <h3>Nuestras excursiones</h3>
+    <ul>
+        {% for e in excursiones %}
+        <li> <b>{{ e.nombre }}</b> {{e.descripción}}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
