@@ -1,18 +1,17 @@
-<!DOCTYPE html>
-<head >
-    <meta charset="UTF-8">
-</head>
+{% extends 'base.html' %}
 
-<html lan="eng">
-<body>
-    hola {{saludo}}
-    <br><br>
-    <h3>Nuestras excursiones</h3>
-    <ul>
-        {% for e in excursiones %}
-        <li> <b>{{ e.nombre }}</b> {{e.descripción}}
-        </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+
+{% block contenido %}
+
+    <div class="mb-3">
+      <form method="post" action="{% url 'buscar' %}">{% csrf_token %}
+        <label for="exampleFormControlInput" class="form-label">Buscar excursión</label>
+        <input name="busqueda" type="text" class="form-control" id="exampleFormControlInput" placeholder="...">
+      </form>
+    </div>
+    <br>
+    {% if buscado %}
+        Se ha buscado {{ buscado }}
+    {% endif %}
+
+{% endblock %}
