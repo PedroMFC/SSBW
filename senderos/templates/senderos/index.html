@@ -1,17 +1,52 @@
 {% extends 'base.html' %}
-
+{% load static %} 
 
 {% block contenido %}
 
     <div class="mb-3">
       <form method="post" action="{% url 'buscar' %}">{% csrf_token %}
         <label for="exampleFormControlInput" class="form-label">Buscar excursión</label>
-        <input name="busqueda" type="text" class="form-control" id="exampleFormControlInput" placeholder="...">
+        <input name="busqueda" type="text" class="form-control" id="exampleFormControlInput" placeholder="Ej: Ruta en Granada">
       </form>
     </div>
     <br>
+
     {% if buscado %}
-        Se ha buscado {{ buscado }}
-    {% endif %}
+      {% for excur in excursiones %}
+        {% ifequal buscado excur.nombre%}
+          <div class="card" style="width: 18rem;">
+            <img src="{% static excur.fotos.0.file %}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ excur.nombre }}</h5>
+              <p class="card-text">{{ excur.descripción }}</p>
+              <h6>Tags</h6> 
+              <div>
+                {% for tag in excur.tags %}
+                  {{ tag }}
+                {% endfor %}
+              </div>
+              <a href="#" class="btn btn-primary">Ver más</a>
+            </div>
+          </div>
+        {% endifequal %}
+      {% endfor %}
+    {% else %}
+      {% for excur in excursiones %}
+          <div class="card" style="width: 18rem;">
+            <img src="{% static excur.fotos.0.file %}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ excur.nombre }}</h5>
+              <p class="card-text">{{ excur.descripción }}</p>
+              <h6>Tags</h6> 
+              <div>
+                {% for tag in excur.tags %}
+                  {{ tag }}
+                {% endfor %}
+              </div>
+              <a href="#" class="btn btn-primary">Ver más</a>
+            </div>
+          </div>
+      {% endfor %}
+    {% endif %} 
 
 {% endblock %}

@@ -31,9 +31,22 @@ comentarios = [
     )
 ]
 
-excursión = Excursión(nombre="Prueba", descripción="asfd asf asdf", likes=1, 
+excursión = Excursión(nombre="Ruta en Granada", descripción="Bonita ruta por Granada", likes=1, 
                       tags=['fácil'], comentarios=comentarios, fotos = [ 
-                          {'pie':'foto1', 'file':'imgs/sendero.jpg'}
+                          {'pie':'foto1', 'file':'imgs/senderos/sendero1.jpg'}
+                        ])
+excursión.save() # Para escribir en la BD
+
+excursión = Excursión(nombre="Ruta por Jerez", descripción="Ruta interesante por Jerez", likes=3, 
+                      tags=['fácil', 'bonita'], comentarios=comentarios, fotos = [ 
+                          {'pie':'foto1', 'file':'imgs/senderos/sendero2.jpg'}
+                        ])
+
+excursión.save() # Para escribir en la BD
+
+excursión = Excursión(nombre="Ruta por Málaga", descripción="Ruta que hay que hacer en Málaga", likes=2, 
+                      tags=['bonita'], comentarios=comentarios, fotos = [ 
+                          {'pie':'foto1', 'file':'imgs/senderos/sendero3.jpg'}
                         ])
 excursión.save() # Para escribir en la BD
 
