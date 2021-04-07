@@ -22,10 +22,17 @@
               </a>
             </div>
         </nav>
-
     </div>
     <div class="container">
       <div style="margin-top:8vh">
+        {% for message in messages %}
+          <div class="container-fluid p-0">
+            <div class="alert {{ message.tags }} alert-dimissible fade show" role="alert">
+              {{ message }}
+            </div>
+          </div>
+        {% endfor %}
+
         {% block contenido %}
 
         {% endblock %}

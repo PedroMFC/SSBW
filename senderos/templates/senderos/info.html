@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %} 
+
+{% block contenido %}
+    <h2>{{ e.nombre }}</h2>
+    <div>{{ e.descripción }}</div>
+      {% for foto in e.fotos %}
+          <div class="card" style="width: 18rem;">
+            <img src="{% static foto.file %}" class="card-img-top" alt="...">
+            <div>{{ foto.pie }}</div>
+          </div>
+      {% endfor %}
+
+      <h5>Comentarios</h5>
+      {% for comentario in e.comentarios %}
+        <h6>{{ comentario.autor }}</h6>
+        <div>Fecha: {{ comentario.fecha }}</div>
+        <div>{{ comentario.contenido }}</div>
+      {% endfor %}
+
+    <div class="d-flex justify-content-end">
+        <form action="{% url 'borrar' e.id %}" method='get'>
+            <button class="btn btn-danger">Borrar</button>
+        </form>
+    </div>
+
+    <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+        data-bs-target="#modalEditar" style="width:10%; margin-top: 2%">Editar</button>
+    </div>
+
+    <!-- Modal Borrar -->
+
+    <div class="modal fade" id="modalBorrar" style="margin-top: 5%;" tabindex="-1" aria-labelledby="modalBorrarLabel" aria-hidden="true">
+        <form action="{% url 'borrar' e.id %}" method="post" enctype="multipart/form-data">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalBorrarLabel">Confirmación de borrado</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ¿Seguro que desea borrar la actividad ?
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-warning">Borrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </form>
+    </div>
+
+     <!-- Modal Editar -->
+     <div class="modal fade" id="modalEditar" style="margin-top: 5%;" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <form action="{% url 'editar' e.id %}" method="post" enctype="multipart/form-data">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Nueva Excursión</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              {% csrf_token %}
+              <table>
+                {{ form.as_table }}
+              </table>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-warning">Editar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </form>
+      </div>
+
+    
+    
+   
+{% endblock %}

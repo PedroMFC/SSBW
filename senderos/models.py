@@ -13,6 +13,13 @@ class Comentarios(EmbeddedDocument):
 	autor     = StringField(max_length=120, required=True)
 	fecha     = DateTimeField(default=datetime.now())
 
+class Fotos(EmbeddedDocument):
+	pie   = StringField(required=False, max_length=120)
+	file  = StringField(required=False)
+
+	def __str__(self):
+		return self.pie
+
 class Excursión(Document):
 	nombre      = StringField(max_length=120, required=True)
 	descripción = StringField(required=True)
@@ -21,5 +28,14 @@ class Excursión(Document):
 	tags        = ListField(StringField(max_length=20))
 	duración    = IntField(default=0)
 	comentarios = ListField(EmbeddedDocumentField(Comentarios))
-	fotos       = ListField()
+	fotos       = ListField(EmbeddedDocumentField(Fotos))
 
+	@property
+	def foto(self):
+		if len(self.fotos) > 0:
+			return self.fotos[0].file
+		else:
+			return ''
+
+	def __str__(self):
+		return self.nombre
