@@ -26,18 +26,8 @@
 
                             {% if socialaccount_providers %}
 
-                            <div class="socialaccount_ballot">
-
-                                <ul class="socialaccount_providers mt-4 list-unstyled">
-                                    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-                                </ul>
-
-                                <!--<div class="login-or">{% trans 'or' %}</div>-->
-
-                            </div>
-                                <p>{% blocktrans with site.name as site_name %}TEngoq ue traducir esto. Please sign in with one
-                                of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-                                for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+                                <p> {% blocktrans %} Si todavía nos has creado una cuenta puedes <a href="{{ signup_url }}">registrarte</a>
+                                ahora. {% endblocktrans %}</p>
 
 
                             {% include "socialaccount/snippets/login_extra.html" %}
