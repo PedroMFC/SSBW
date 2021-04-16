@@ -1,3 +1,5 @@
 Django>=3.0,<4.0
 mongoengine
+django-allauth==0.43.0
+django-bootstrap4
 # psycopg2-binary>=2.8

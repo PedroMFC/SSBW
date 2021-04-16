@@ -30,10 +30,12 @@
           </div>
       {% endfor %}
 
+    {% if user.is_staff %}
     <div class="d-flex justify-content-end">
       <button type="button" class="btn btn-warning" data-bs-toggle="modal"
       data-bs-target="#exampleModal" style="width:10%; margin-top: 2%">Añadir</button>
     </div>
+    {% endif %}
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" style="margin-top: 5%;" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

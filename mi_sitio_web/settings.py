@@ -47,7 +47,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'senderos.apps.SenderosConfig'
+    'django.contrib.sites', # new
+
+    'allauth', # new
+    'allauth.account', # new
+    'allauth.socialaccount', # new
+    'allauth.socialaccount.providers.github', # new
+ 
+    'bootstrap4',
+    # Custom apps
+    'senderos.apps.SenderosConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -65,7 +75,8 @@ ROOT_URLCONF = 'mi_sitio_web.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), 
+        os.path.join(BASE_DIR, 'senderos/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,4 +143,61 @@ STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS =  (
     os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'senderos/static'),
 )
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SITE_ID = 1
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+LOGIN_REDIRECT_URL = 'index'
+
+
+LOG_FILE = os.path.join(BASE_DIR, 'Server.log')
+
+LOGGING = {
+	'version': 1,
+	'disable_existing_loggers': False,
+				
+	'formatters': {
+		'verbose': {
+			'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+									'datefmt': "%d/%b/%Y %H:%M:%S"
+							},
+		'simple': {
+			'format': '%(levelname)s [%(name)s:%(lineno)s] %(message)s'
+							},
+						},
+				
+	'handlers': {
+		'file': {
+			'level': 'INFO',
+			'class': 'logging.FileHandler',
+			'filename': os.path.join(BASE_DIR, LOG_FILE),
+			'formatter': 'verbose',
+			'mode': 'w'
+			},
+		'console': {
+			'level': 'DEBUG',
+			'class': 'logging.StreamHandler',
+			'formatter': 'simple'
+		}
+	},
+				
+	'loggers': {
+		'django': {
+			'handlers': ['file'],
+			'propagate': True,
+			'level': 'ERROR',
+		},
+		'': {
+				'handlers': ['file', 'console'],
+				'level': 'DEBUG',
+			}
+		}
+	}

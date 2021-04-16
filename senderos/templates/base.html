@@ -19,6 +19,18 @@
               <a class="navbar-brand" href="#">
                 <img src="{% static 'imgs/logo.gif' %}" alt="" width="30" height="24" class="d-inline-block align-text-top">
                 Senderos
+
+                <span class="text-right">
+                  {% if user.is_authenticated %}
+                    <span class="p-3">{{ user.username }}</span>
+                    <a class="btn btn-outline-danger my-2 my-sm-0" href="{% url 'account_logout' %}">Cerrar sesión</a>
+                  {% else %}
+                  <div class="button-box">
+                    <a class="btn btn-primary me-2" href="{% url 'account_login' %}">Iniciar sesión</a>
+                    <a class="btn btn-succes" href="{% url 'account_signup' %}">Registrarse</a>
+                  </div>
+                  {% endif %}
+                </span>
               </a>
             </div>
         </nav>

@@ -1,4 +1,4 @@
-FROM python:3-alpine
+FROM python:3-slim
 ENV PYTHONUNBUFFERED=1
 WORKDIR /code
 COPY requirements.txt /code/

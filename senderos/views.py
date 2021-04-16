@@ -5,14 +5,17 @@ from .forms import ExcursiónForm
 from django.contrib import messages
 from django.conf import settings
 from django import forms
+from django.contrib.auth import authenticate, login
 
 from mongoengine.queryset.visitor import Q 
+
+import allauth
 
 # Create your views here.
 #def index(request):
 #    return HttpResponse('Hola, desde index')
 
-IMAGE_DIR = os.path.join('static', 'imgs', 'senderos')
+IMAGE_DIR = os.path.join('senderos', 'static', 'imgs', 'senderos')
 
 def index(request):
     context = {
@@ -20,6 +23,7 @@ def index(request):
         'excursiones': Excursión.objects.all(),
         'form': ExcursiónForm(),
     }
+    
     return render(request, 'senderos/index.html', context)
 
 def buscar(request):
@@ -54,7 +58,6 @@ def SaveFiles(id, files, e, input_d):
     dire = os.path.join(IMAGE_DIR, id)
 
     try:
-        print("HACIENDO TRY")
         if not os.path.isdir(dire):
             os.mkdir(dire)
         file_n = os.path.join(dire, str(files['foto']))
@@ -62,11 +65,11 @@ def SaveFiles(id, files, e, input_d):
         with open(file_n, 'wb+') as dest:
             for chunk in files['foto'].chunks():
                 dest.write(chunk)
-        e.fotos=[Fotos(pie=input_d.get('pie'), file="/imgs/senderos/"+id+"/"+input_d.get('foto').name)]
+        e.fotos=[Fotos(pie=input_d.get('pie'), file="imgs/senderos/"+id+"/"+input_d.get('foto').name)]
         e.save()
 
     except OSError as error:
-        print('************ ALGO SALIÓ MAL', error)
+        print('************ ALGO SALIÓ MAL: ', error)
 
 
 def editar(request, id):
@@ -114,3 +117,4 @@ def añadir(request):
 
     #return render(request, 'senderos/añadir.html', context)
     return redirect('index')
+
