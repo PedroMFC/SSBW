@@ -6,8 +6,8 @@ from mongoengine import connect, Document, EmbeddedDocument
 from mongoengine.fields import EmbeddedDocumentField, StringField, ListField, IntField, DateTimeField, FileField
 from datetime import datetime
 from django.core.validators import RegexValidator, FileExtensionValidator
-#from rest_framework_mongoengine import serializers
-from rest_framework import serializers
+from rest_framework_mongoengine import serializers
+#from rest_framework import serializers
 
 connect('senderos', host='mongo')
 
@@ -44,6 +44,7 @@ class Excursión(Document):
 		return self.nombre
 
 # SERIALIZERS
+'''
 class ExcursiónSerializer(serializers.Serializer):
 	nombre = serializers.CharField(max_length = 20)
 	descripción = serializers.CharField(validators=[RegexValidator('^[A-Z]', message="No empieza por mayúscula")])
@@ -66,5 +67,4 @@ class ExcursiónSerializer(serializers.Serializer):
 class ExcursiónSerializer(serializers.DocumentSerializer):
 	class Meta:
 		model = Excursión
-		fields = ['nombre', 'descripción']
-'''
+

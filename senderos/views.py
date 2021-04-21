@@ -174,8 +174,7 @@ class ExcursiónView(APIView):
         try:
             e = Excursión.objects.get(id=id)
             serializer = ExcursiónSerializer(e, data=request.data)
-            print(serializer)
-
+            
             if serializer.is_valid():
                 serializer.save() # NO FUNCIONA CORRECTAMENTE
                 
