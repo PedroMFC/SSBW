@@ -2,4 +2,6 @@ Django>=3.0,<4.0
 mongoengine
 django-allauth==0.43.0
 django-bootstrap4
+djangorestframework>=3.1, <4.0
+djangorestframework-simplejwt>=4.6, <5.0
 # psycopg2-binary>=2.8

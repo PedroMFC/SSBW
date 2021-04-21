@@ -5,6 +5,9 @@
 from mongoengine import connect, Document, EmbeddedDocument	
 from mongoengine.fields import EmbeddedDocumentField, StringField, ListField, IntField, DateTimeField, FileField
 from datetime import datetime
+from django.core.validators import RegexValidator, FileExtensionValidator
+#from rest_framework_mongoengine import serializers
+from rest_framework import serializers
 
 connect('senderos', host='mongo')
 
@@ -39,3 +42,29 @@ class Excursión(Document):
 
 	def __str__(self):
 		return self.nombre
+
+# SERIALIZERS
+class ExcursiónSerializer(serializers.Serializer):
+	nombre = serializers.CharField(max_length = 20)
+	descripción = serializers.CharField(validators=[RegexValidator('^[A-Z]', message="No empieza por mayúscula")])
+	foto = serializers.FileField(required=False, allow_null='true', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'png'])])
+	pie = serializers.CharField(max_length=80, required=False)
+
+	def create(self, validated_data):
+		return Excursión.objects.create(**validated_data)
+
+	def update(self, instance, validated_data):
+		instance.nombre = validated_data.get('nombre', instance.nombre)
+		instance.descripción = validated_data.get('descripción', instance.descripción)
+		instance.foto = validated_data.get('foto', instance.foto)
+		instance.pie = validated_data.get('pie', instance.pie)
+		
+		instance.save()
+		return instance
+
+'''
+class ExcursiónSerializer(serializers.DocumentSerializer):
+	class Meta:
+		model = Excursión
+		fields = ['nombre', 'descripción']
+'''
