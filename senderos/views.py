@@ -93,7 +93,7 @@ def editar(request, id):
             e = Excursión.objects.get(id=id)
             input_d = form.cleaned_data
             files = request.FILES
-            e. nombre = input_d['nombre']
+            e.nombre = input_d['nombre']
             e.descripción = input_d['descripción']
             e.save()
 
@@ -183,3 +183,21 @@ class ExcursiónView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except:
             raise Http404
+
+# LIKE AJAX
+
+def cambiarlikes(request, id):
+    if request.method == 'GET':
+        e = Excursión.objects.get(id=id)
+        subir = request.GET['subir']
+
+        if subir == 'true':
+            e.likes = e.likes + 1
+        else:
+            e.likes = e.likes - 1
+
+        e.save()
+
+        return HttpResponse('success')
+    else:
+        return HttpResponse("unsuccesful")

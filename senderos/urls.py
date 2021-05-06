@@ -18,4 +18,5 @@ urlpatterns = [
     path('borrar/<str:id>/', views.borrar, name='borrar'),
     path('api/excursiones', views.ExcursionesView.as_view(), name="excursiones"),
     path('api/excursion/<str:id>', views.ExcursiónView.as_view(), name="excursión"),
+    path('cambiarlikes/<str:id>', views.cambiarlikes, name="cambiarlikes"),
 ]
