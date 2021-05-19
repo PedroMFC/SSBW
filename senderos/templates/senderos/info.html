@@ -98,7 +98,7 @@ $(document).ready(function(){
 
        <!-- Modal Borrar-->
        <div class="modal fade" id="modalBorrar" style="margin-top: 5%;" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <form action="{% url 'borrar' e.id %}" method='get' enctype="multipart/form-data">
+        <form action="{% url 'borrar' e.id %}" method='get'>
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
@@ -106,12 +106,12 @@ $(document).ready(function(){
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              {% csrf_token %}
+              <!-- {% csrf_token %} -->
               <p>Se borrará definitivamente</p>
               <h3>{{ e.nombre }}</h3>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger">Sí, eliminar definitivamente</button>
+              <button type="submit" class="btn btn-danger">Sí, eliminar definitivamente</button>
             </div>
             </div>
           </div>
