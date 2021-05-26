@@ -1,0 +1,2 @@
+[26/May/2021 17:44:28] INFO [senderos.signals:9] user pedro logged in through page http://localhost:8000/accounts/login/
+[26/May/2021 17:45:46] INFO [senderos.signals:19] user pedro logged out through page http://localhost:8000/accounts/logout/
