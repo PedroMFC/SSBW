@@ -27,6 +27,8 @@ $(document).ready(function(){
         data: {subir:subir},
         success: function(respuesta){
           console.log(respuesta)
+          $('#likesNumber').load(' #likesNumber'); // El espacio en ' #likesNumber' es IMPORTANTE!!
+          
         }
       })
     }
@@ -50,7 +52,7 @@ $(document).ready(function(){
       {% endfor %}
 
       <div>
-        Likes: {{e.likes }}
+        <h5>Likes:</h5> <span id="likesNumber">{{e.likes }}</span>
 
         <span class="likes">👍</span> &nbsp;&nbsp;&nbsp; <span class="likes">👎</span>
       </div>

@@ -3,6 +3,9 @@ import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import './App.css';
 import React from 'react';
+import Busqueda from './components/Busqueda.js';
+import Info from './components/Info.js';
+import ExcursionesList from './components/ExcursionesList.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,6 +13,8 @@ class App extends React.Component {
 
   	this.state = {
     	excursiones:[],
+      informacion: '',
+      busqueda: ''
 		}
 	}
 
@@ -20,14 +25,56 @@ class App extends React.Component {
 		fetch(url)
 			.then(res => res.json())
 			.then(res => {
-						console.log(res)
-						this.setState({excursiones:res})   // Se cambia el state y re-renderiza
+						let excursion = res.map( e=> {
+              e.on = true
+              return e
+            })
+            console.log(excursion)
+						this.setState({excursiones:excursion})   
 					})
 			.catch(error => {
 				alert('Error '+ error)
 			})
 	}
 
+  infoID = () => {
+    const [e] = this.state.excursiones.filter(e => e.id == this.state.info)
+    return e
+  }
+
+  excursiones = () =>{
+    return this.state.excursiones.filter( e => e.on == true)
+  }
+
+  handleInfo = (id) =>{
+    if (id === ''){
+      this.setState({info: ''})
+    } else{
+      this.setState({info:id})
+    }
+  }
+
+  handleBuscar = (term) =>{
+    if (term){
+      let excursion = this.state.excursiones.map( e =>{
+        let expr = new RegExp(term, "i")
+        console.log('Expr ', expr)
+        if(!e.nombre.match(expr) && !e.descripción.match(expr)){
+          e.on = false
+        } else{
+          e.on = true
+        }
+        return e
+      })
+      this.setState({excursiones:excursion})
+    } else{
+      let excursion = this.state.excursiones.map( e =>{
+        e.on = true
+        return e
+      })
+      this.setState({excursiones:excursion})
+    }
+  }
   render() {
     return (
       <Container fluid>
@@ -41,6 +88,15 @@ class App extends React.Component {
           />{' '}
           <span style={{marginLeft:'2vw'}}>Senderos Granada</span>
         </Navbar>
+        <Container>
+          { this.state.info ? <Info e={this.infoID()} handleInfo = {this.handleInfo} />:
+          <>
+          <Busqueda handleBuscar={this.handleBuscar}/>
+          <ExcursionesList excursiones = {this.excursiones()}
+                          handleInfo = {this.handleInfo}/>
+          </>   
+        }
+        </Container>
       </Container>
     );
   }
