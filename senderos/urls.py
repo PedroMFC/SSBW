@@ -1,5 +1,7 @@
 from django.urls import path, include
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from rest_framework_simplejwt import views as jwt_views
 from . import views
 
@@ -19,4 +21,4 @@ urlpatterns = [
     path('api/excursiones', views.ExcursionesView.as_view(), name="excursiones"),
     path('api/excursion/<str:id>', views.ExcursiónView.as_view(), name="excursión"),
     path('cambiarlikes/<str:id>', views.cambiarlikes, name="cambiarlikes"),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

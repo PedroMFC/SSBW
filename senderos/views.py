@@ -26,7 +26,7 @@ import allauth
 #def index(request):
 #    return HttpResponse('Hola, desde index')
 
-IMAGE_DIR = os.path.join('senderos', 'static', 'imgs', 'senderos')
+IMAGE_DIR = os.path.join('web','static','imgs','senderos')
 
 logger = logging.getLogger(__name__)
 
@@ -69,7 +69,7 @@ def borrar(request, id):
 
 def SaveFiles(id, files, e, input_d):
     dire = os.path.join(IMAGE_DIR, id)
-
+    print('Dirección: ', dire)
     try:
         if not os.path.isdir(dire):
             os.mkdir(dire)

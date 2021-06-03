@@ -15,7 +15,7 @@ class ExcursionItem extends React.Component {
 
 		return (  
             <Card style={{ width: '18rem' }}>
-            <Card.Img src={'../../../'+img} />
+            <Card.Img src={'static/'+img} />
             <Card.Body>
                 <Card.Title>{this.props.nombre}</Card.Title>
                 <Card.Text>
