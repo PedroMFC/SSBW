@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %} 
 
+{% load i18n %}
+
 {% block contenido %}
 
 <script>
@@ -43,7 +45,7 @@ $(document).ready(function(){
           </div>
       {% endfor %}
 
-      <h5>Comentarios</h5>
+      <h5>{% trans 'Comments' %}</h5>
       {% for comentario in e.comentarios %}
         <h6>{{ comentario.autor }}</h6>
         <div>Fecha: {{ comentario.fecha }}</div>
@@ -65,12 +67,12 @@ $(document).ready(function(){
     </div> -->
 
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn btn-danger" data-bs-toggle="modal"data-bs-target="#modalBorrar" style="width:10%; margin-top: 2%">Borrar</button>
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal"data-bs-target="#modalBorrar" style="width:10%; margin-top: 2%">{% trans 'Delete' %}</button>
     </div>
 
     <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-success" data-bs-toggle="modal"
-        data-bs-target="#modalEditar" style="width:10%; margin-top: 2%">Editar</button>
+        data-bs-target="#modalEditar" style="width:10%; margin-top: 2%">{% trans 'Edit' %}</button>
     </div>
     {% endif %}
 
@@ -80,7 +82,7 @@ $(document).ready(function(){
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Nueva Excursión</h5>
+              <h5 class="modal-title" id="exampleModalLabel">{% trans 'New path' %}</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -89,7 +91,7 @@ $(document).ready(function(){
                 {{ form.as_table }}
               </table>
               <div class="modal-footer">
-                <button type="submit" class="btn btn-warning">Editar</button>
+                <button type="submit" class="btn btn-warning">{% trans 'Edit' %}</button>
               </div>
             </div>
           </div>
@@ -103,16 +105,16 @@ $(document).ready(function(){
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">¿Está seguro que desea borrar la excusrsión?</h5>
+              <h5 class="modal-title" id="exampleModalLabel">{% trans 'Are you sure you want to delete' %}</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <!-- {% csrf_token %} -->
-              <p>Se borrará definitivamente</p>
+              <p>{% trans 'It will be removed permanently' %}</p>
               <h3>{{ e.nombre }}</h3>
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-danger">Sí, eliminar definitivamente</button>
+              <button type="submit" class="btn btn-danger">{% trans 'Yes, delete permanetly' %}</button>
             </div>
             </div>
           </div>

@@ -1,4 +1,0 @@
-[03/Jun/2021 17:44:21] INFO [senderos.signals:9] user pedro logged in through page http://localhost:8000/accounts/login/
-[03/Jun/2021 17:44:26] INFO [senderos.signals:19] user pedro logged out through page http://localhost:8000/accounts/logout/
-[03/Jun/2021 17:44:39] INFO [senderos.signals:9] user pedro2 logged in through page http://localhost:8000/accounts/signup/
-[03/Jun/2021 17:44:52] INFO [senderos.signals:9] user admin logged in through page http://localhost:8000/admin/login/?next=/admin/

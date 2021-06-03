@@ -62,7 +62,7 @@ def info(request, id):
 def borrar(request, id):
     Excursión.objects.get(id=id).delete()
 
-    messages.add_message(request, messages.ERROR, 'Excursión borrada')
+    messages.add_message(request, messages.ERROR, _('Path deleted'))
 
     return redirect('index')
 
@@ -101,7 +101,7 @@ def editar(request, id):
             if len(files) > 0:
                 SaveFiles(id, files, e, input_d)
 
-            messages.add_message(request, messages.INFO, 'Excursión editada')
+            messages.add_message(request, messages.INFO, _('Path edited'))
         else:
             messages.add_message(request, messages.WARNING, 'Problemas')
 
@@ -123,7 +123,7 @@ def añadir(request):
                 print('Input:\n', input_d, '\n', input_d.get('foto').name)
                 SaveFiles(str(reg.id), files, reg, input_d)
 
-            messages.add_message(request, messages.INFO, 'Excursión añadida')
+            messages.add_message(request, messages.INFO, _('Path added'))
         else:
             print('n', form.errors, '\n')
             messages.add_message(request, messages.ERROR, form.errors)

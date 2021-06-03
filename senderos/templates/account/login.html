@@ -24,17 +24,8 @@
                         <div class="col-6">
                             {% get_providers as socialaccount_providers %}
 
-                            {% if socialaccount_providers %}
-
-                                <p> {% blocktrans %} Si todavía nos has creado una cuenta puedes <a href="{{ signup_url }}">registrarte</a>
-                                ahora. {% endblocktrans %}</p>
-
-
-                            {% include "socialaccount/snippets/login_extra.html" %}
-                            {% else %}
                             <p>{% blocktrans %}If you have not created an account yet, then please
                                 <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-                            {% endif %}
 
                         </div>
                         <div class="col col-6">
@@ -55,7 +46,7 @@
                                             {% trans "Forgot Password?" %}</a>
                                     </div>
                                     <div class="col col-6 text-right">
-                                        <a href="{{ signup_url }}">sign up</a>
+                                        <a href="{{ signup_url }}">{% trans "Sign up" %}</a>
                                     </div>
                                 </div>
                             </form>
