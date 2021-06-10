@@ -12,7 +12,7 @@ class ExcursionesList extends React.Component {
 	// onChange bindeada para que coja el this
 	render() {
 		return (  
-        <Container>
+        <Container style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gridGap: '10px', gridAutoRows: 'minMax(100px, auto)'}}>
             {this.props.excursiones.map( excur =>(
                 <ExcursionItem
                     key={excur.id}
