@@ -18,6 +18,7 @@ class Info extends React.Component {
         </h1>
              <img src={'/static/'+this.props.e.fotos[0].file} />
           <div>{this.props.e.descripción}</div>
+          <div>Likes: {this.props.e.likes}</div>
           <Button variant="primary" onClick={() => this.props.handleInfo()}>Atrás</Button>
         </Container>
 	)}
