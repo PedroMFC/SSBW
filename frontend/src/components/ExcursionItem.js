@@ -11,11 +11,11 @@ class ExcursionItem extends React.Component {
 
 	// onChange bindeada para que coja el this
 	render() {
-        const { img } = this.props
+        //const { img } = this.props
 
 		return (  
             <Card style={{ width: '18rem' }}>
-            <Card.Img src={'static/'+img} />
+            <Card.Img src={'/static/'+this.props.img} />
             <Card.Body>
                 <Card.Title>{this.props.nombre}</Card.Title>
                 <Card.Text>

@@ -173,8 +173,8 @@ STATICFILES_DIRS =  (
     #os.path.join(BASE_DIR, 'web','static') # NO funciona porque no puede apuntar al de despliegue
 )
 
-MEDIA_ROOT  = os.path.join(BASE_DIR, 'web', 'media')
-MEDIA_URL = 'web/media/'
+# MEDIA_ROOT  = os.path.join(BASE_DIR, 'web', 'media')
+# MEDIA_URL = 'web/media/'
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",

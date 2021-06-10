@@ -16,10 +16,7 @@ class Info extends React.Component {
         <h1>
           {this.props.e.nombre}
         </h1>
-             <img
-            src={'../logo-senderos.gif'}
-
-          />
+             <img src={'/static/'+this.props.e.fotos[0].file} />
           <div>{this.props.e.descripción}</div>
           <Button variant="primary" onClick={() => this.props.handleInfo()}>Atrás</Button>
         </Container>
