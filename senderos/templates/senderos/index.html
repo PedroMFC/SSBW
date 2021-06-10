@@ -13,7 +13,9 @@
     </div>
     <br>
 
+    <div class="grid-container">
       {% for excur in excursiones %}
+      <div class="grid-item">
           <div class="card" style="width: 18rem;">
             <img src="{% static excur.foto %}"  class="card-img-top" alt="...">
             <div class="card-body">
@@ -30,7 +32,9 @@
               </form>
             </div>
           </div>
+        </div>
       {% endfor %}
+    </div>
 
     {% if user.is_staff %}
     <div class="d-flex justify-content-end">
